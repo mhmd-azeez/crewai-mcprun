@@ -1,0 +1,25 @@
+generate_strings_task:
+ description: >
+   Generate a diverse list of 3 test strings to hash, including:
+   - Common passwords
+   - Multi-word phrases 
+   - Special characters
+   - Different lengths
+   - Unicode characters
+ expected_output: >
+   A list of 3 strings with explanation of why each was chosen
+ agent: string_generator
+
+hash_strings_task:
+ description: >
+   For each string from the generate_strings_task:
+   1. Generate MD5 hash (for checksums only)
+   2. Generate SHA-1 hash (not recommended for security)
+   3. Generate SHA-256 hash (current standard)
+ expected_output: >
+   A markdown report containing:
+   - Original string
+   - Hash value from each algorithm
+   - Notable differences between algorithms
+   - Recommendations on algorithm choice
+ agent: hash_tester
