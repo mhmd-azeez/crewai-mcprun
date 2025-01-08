@@ -23,7 +23,7 @@ class Acme():
         return Agent(
             config=self.agents_config['social_media_manager'],
             verbose=True,
-            tools=mcpx_tools
+            tools=mcpx_tools # Give this agent access to the mcp.run tools
         )
 
     @task
