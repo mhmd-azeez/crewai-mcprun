@@ -1,8 +1,8 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from acme.tools.servlet_tool import CryptoHashTool
+from acme.tools.mcpx_tools import get_mcprun_tools
 
-crypto_hash_tool = CryptoHashTool(wasm_path="./crypto_hash.wasm")
+mcpx_tools = get_mcprun_tools()
 
 @CrewBase
 class Acme():
@@ -12,31 +12,30 @@ class Acme():
     tasks_config = 'config/tasks.yaml'
 
     @agent
-    def string_generator(self) -> Agent:
+    def zookeeper(self) -> Agent:
         return Agent(
-            config=self.agents_config['string_generator'],
+            config=self.agents_config['zookeeper'],
             verbose=True
         )
-
-    @agent 
-    def hash_tester(self) -> Agent:
+    
+    @agent
+    def social_media_manager(self) -> Agent:
         return Agent(
-            config=self.agents_config['hash_tester'],
+            config=self.agents_config['social_media_manager'],
             verbose=True,
-            tools=[crypto_hash_tool]
+            tools=mcpx_tools
         )
 
     @task
-    def generate_strings(self) -> Task:
+    def write_interesting_stories_task(self) -> Task:
         return Task(
-            config=self.tasks_config['generate_strings_task']
+            config=self.tasks_config['write_interesting_stories_task']
         )
 
     @task
-    def hash_strings(self) -> Task:
+    def publish_blog_posts_task(self) -> Task:
         return Task(
-            config=self.tasks_config['hash_strings_task'],
-            output_file='hash_results.md'
+            config=self.tasks_config['publish_blog_posts_task']
         )
 
     @crew

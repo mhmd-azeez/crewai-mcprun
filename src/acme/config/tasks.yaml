@@ -1,25 +1,13 @@
-generate_strings_task:
- description: >
-   Generate a diverse list of 3 test strings to hash, including:
-   - Common passwords
-   - Multi-word phrases 
-   - Special characters
-   - Different lengths
-   - Unicode characters
- expected_output: >
-   A list of 3 strings with explanation of why each was chosen
- agent: string_generator
+write_interesting_stories_task:
+  description: >
+    Write an engaging zoo update that captures the week's most fascinating stories and memorable moments. Share stand-out animal moments that show off their unique personalities - like how an orangutan used tools in a clever way, or when animals did something unexpectedly funny or heartwarming. Include any exciting visitor interactions, behind-the-scenes keeper stories, and cool facility updates. Focus on the most interesting details that would make someone say "wow, I didn't know animals did that!" Keep the tone friendly and conversational, like you're telling a friend about the coolest things that happened at the zoo this week. Aim for 250 words and make sure each story shares something surprising or delightful about our animals and the people who care for them.
+  expected_output: >
+    5 engaging stories/updates that summerize the day.
+  agent: zookeeper
 
-hash_strings_task:
- description: >
-   For each string from the generate_strings_task:
-   1. Generate MD5 hash (for checksums only)
-   2. Generate SHA-1 hash (not recommended for security)
-   3. Generate SHA-256 hash (current standard)
- expected_output: >
-   A markdown report containing:
-   - Original string
-   - Hash value from each algorithm
-   - Notable differences between algorithms
-   - Recommendations on algorithm choice
- agent: hash_tester
+publish_blog_posts_task:
+  description: >
+    Publish the stories as one blog post to the zoo's WordPress site. Check the last few posts to make sure you're not repeating the same content.
+  expected_output: >
+    A live blog post series that showcases the zoo's animals and encourages visitors to learn more. You can also publish directly to WordPress. Set the status to "published" directly. If the Tool suceeds, then the task is done.
+  agent: social_media_manager
